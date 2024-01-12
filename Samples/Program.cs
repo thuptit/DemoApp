@@ -4,6 +4,12 @@ var container = new Container();
 container.Register<IA, A>().AsPerScope();
 container.Register<IB, B>().AsPerScope();
 
+using(var scope = container.CreateScope())
+{
+    var a1 = (IA)scope.GetService(typeof(IA));
+    a1.GetInstanceId();
+}
+
 var a = container.Resolve<IA>();
 a.GetInstanceId();
 
